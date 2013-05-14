@@ -41,7 +41,7 @@ namespace Compiler {
 
 		internal void InterpretFile() {
 			foreach (var line in MainFile.Lines) {
-				Out.WriteLine("{2}", line.FileName, line.LineNumber, line);
+				Out.WriteLine("{2}", line.File.FileName, line.LineNumber, line);
 			}
 		}
 	}

@@ -39,8 +39,10 @@ namespace Compiler {
 
 				line = line.Trim();
 				if (line.Length > 0) {
-					var dlgLine = new DialogueLine(line, FileName, LineNumber); 
-					contents.Add(dlgLine);
+					var dlgLine = new DialogueLine(line, this, LineNumber); 
+					if (dlgLine.InterpretAtSigns()) {
+						contents.Add(dlgLine);
+					}
 				}
 
 				line = File.ReadLine();

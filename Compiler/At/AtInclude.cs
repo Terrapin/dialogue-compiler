@@ -7,12 +7,13 @@ namespace At {
 	class AtInclude : AtStatement {
 		private DialogueFile File;
 
-		public AtInclude(string param) {
-			File = new DialogueFile(param);
+		public AtInclude(DialogueLine param) {
+			File = new DialogueFile(param.Content);
 		}
 
-		public override void Run(DialogueFile file) {
+		public override bool Run(DialogueFile file) {
 			file.AddLines(File.Lines);
+			return false;
 		}
 	}
 }

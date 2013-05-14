@@ -9,13 +9,13 @@ namespace At {
 			}
 		}
 
-		private static Dictionary<string, Func<string, AtStatement>> statements = new Dictionary<string, Func<string, AtStatement>>();
+		private static Dictionary<string, Func<DialogueLine, AtStatement>> statements = new Dictionary<string, Func<DialogueLine, AtStatement>>();
 
 		static AtStatement() {
 			statements["include"] = (param) => new AtInclude(param);
 		}
 
-		public static AtStatement GetStatement(string name, string param) {
+		public static AtStatement GetStatement(string name, DialogueLine param) {
 			if (statements.ContainsKey(name)) {
 				return statements[name](param);
 			}
@@ -23,7 +23,7 @@ namespace At {
 			throw new NoSuchStatementException(name);
 		}
 
-		public abstract void Run(DialogueFile file);
+		public abstract bool Run(DialogueFile file);
 	}
 }
 
