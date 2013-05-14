@@ -38,6 +38,8 @@
     <Compile Include="DialogueCompiler.cs" />
     <Compile Include="DialogueLine.cs" />
     <Compile Include="DialogueFile.cs" />
+    <Compile Include="At\AtInclude.cs" />
+    <Compile Include="At\AtStatement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -45,5 +47,8 @@
       <Project>{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}</Project>
       <Name>CommandLine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="At\" />
   </ItemGroup>
 </Project>
