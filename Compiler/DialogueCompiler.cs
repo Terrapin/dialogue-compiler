@@ -12,10 +12,20 @@ namespace Compiler {
 			public string Output { get; set; }
 		}
 
+		public string BasePath { get; private set; }
+
+		public static DialogueCompiler Instance { get; private set; }
+
 		private DialogueFile MainFile;
 		private TextWriter Out;
 
 		public DialogueCompiler(Options opts) {
+			if (Instance == null) {
+				Instance = this;
+			}
+
+			BasePath = Path.GetDirectoryName(Path.GetFullPath(opts.InputFile));
+
 			MainFile = new DialogueFile(opts.InputFile);
 
 			if (opts.Output == null) {

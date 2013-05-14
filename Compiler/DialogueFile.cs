@@ -22,8 +22,12 @@ namespace Compiler {
 
 		public DialogueFile(string path) {
 			LineNumber = 0;
-			File = new StreamReader(path);
 			FileName = Path.GetFileNameWithoutExtension(path);
+			File = new StreamReader(Path.Combine(DialogueCompiler.Instance.BasePath, path));
+		}
+
+		public void AddLines(IEnumerable<DialogueLine> lines) {
+			contents.AddRange(lines);
 		}
 
 		public void Parse() {
