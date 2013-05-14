@@ -12,11 +12,11 @@ namespace Compiler {
 			public string Output { get; set; }
 		}
 
-		private DialogFile MainFile;
+		private DialogueFile MainFile;
 		private TextWriter Out;
 
 		public DialogueCompiler(Options opts) {
-			MainFile = new DialogFile(opts.InputFile);
+			MainFile = new DialogueFile(opts.InputFile);
 
 			if (opts.Output == null) {
 				Out = Console.Out;
@@ -26,21 +26,12 @@ namespace Compiler {
 		}
 
 		public void Run() {
-			InterpretFile(MainFile);
+			InterpretFile();
 		}
 
-		internal void InterpretFile(DialogFile reader) {
-			var line = reader.ReadLine();
-
-			while (line != null) {
-				line = line.Trim();
-				if (line.Length > 0) {
-					var t = new DialogLine(line);
-
-					Out.WriteLine(t);
-				}
-
-				line = reader.ReadLine();
+		internal void InterpretFile() {
+			foreach (var line in MainFile.Lines) {
+				Out.WriteLine("{2}", line.FileName, line.LineNumber, line);
 			}
 		}
 	}
