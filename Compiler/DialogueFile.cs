@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Compiler {
 	public class DialogueFile {
-		private TextReader File;
-		private int LineNumber;
+		private TextReader file;
+		private int lineNumber;
 		private List<DialogueLine> contents;
 
 		public IEnumerable<DialogueLine> Lines {
@@ -21,9 +21,21 @@ namespace Compiler {
 		public string FileName { get; private set; }
 
 		public DialogueFile(string path) {
-			LineNumber = 0;
+			lineNumber = 0;
 			FileName = Path.GetFileNameWithoutExtension(path);
-			File = new StreamReader(Path.Combine(DialogueCompiler.Instance.BasePath, path));
+
+			var f = path = Path.Combine(DialogueCompiler.Instance.BasePath, path);
+			if (!File.Exists(f)) {
+				f = path + ".txt";
+				if (!File.Exists(f)) {
+					f = path + ".dlg";
+					if (!File.Exists(f)) {
+						f = path + ".ch";
+					}
+				}
+			}
+
+			file = new StreamReader(f);
 		}
 
 		public void AddLines(IEnumerable<DialogueLine> lines) {
@@ -33,19 +45,19 @@ namespace Compiler {
 		public void Parse() {
 			contents = new List<DialogueLine>();
 
-			var line = File.ReadLine();
+			var line = file.ReadLine();
 			while (line != null) {
-				LineNumber += 1;
+				lineNumber += 1;
 
 				line = line.Trim();
 				if (line.Length > 0) {
-					var dlgLine = new DialogueLine(line, this, LineNumber); 
+					var dlgLine = new DialogueLine(line, this, lineNumber); 
 					if (dlgLine.InterpretAtSigns()) {
 						contents.Add(dlgLine);
 					}
 				}
 
-				line = File.ReadLine();
+				line = file.ReadLine();
 			}
 		}
 	}
