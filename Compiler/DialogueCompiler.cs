@@ -30,14 +30,14 @@ namespace Compiler {
 		}
 
 		internal void InterpretFile(DialogFile reader) {
-			string line = reader.ReadLine();
+			var line = reader.ReadLine();
 
 			while (line != null) {
 				line = line.Trim();
 				if (line.Length > 0) {
-					;
+					var t = new DialogLine(line);
 
-					Out.WriteLine(line);
+					Out.WriteLine(t);
 				}
 
 				line = reader.ReadLine();
