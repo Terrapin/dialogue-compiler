@@ -34,6 +34,19 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DialogueCompiler.cs" />
+    <Compile Include="At\AtStatement.cs" />
+    <Compile Include="At\AtInclude.cs" />
+    <Compile Include="DialogFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\CommandLine\src\CommandLine\CommandLine.csproj">
+      <Project>{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}</Project>
+      <Name>CommandLine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="At\" />
+  </ItemGroup>
 </Project>
