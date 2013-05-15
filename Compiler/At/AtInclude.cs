@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Compiler;
 
-namespace At {
+namespace Compiler.At {
 	class AtInclude : AtStatement {
 		private DialogueFile File;
 

@@ -1,9 +1,10 @@
 using System;
 using System.Text.RegularExpressions;
-using At;
+using Compiler.At;
 
 namespace Compiler {
 	public class DialogueLine {
+
 		public DialogueFile File { get; private set; }
 
 		public int LineNumber { get; private set; }

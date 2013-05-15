@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Compiler;
 
-namespace At {
+namespace Compiler.At {
 	public abstract class AtStatement {
 		public class NoSuchStatementException : Exception {
 			public NoSuchStatementException(string statement) : base(statement) {
