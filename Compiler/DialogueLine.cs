@@ -43,10 +43,9 @@ namespace Compiler {
 
 		public bool InterpretAtSigns() {
 			bool keep = true;
-			if (LineType.StartsWith("@")) {
-				AtStatement stmt = AtStatement.GetStatement(LineType.Substring(1), this);
-				keep &= stmt.Run(File);
-			}
+
+			AtStatement stmt = AtStatement.GetStatement(LineType, this);
+			keep &= stmt.Run(File);
 
 			return keep;
 		}

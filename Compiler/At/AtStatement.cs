@@ -12,7 +12,7 @@ namespace Compiler.At {
 		private static Dictionary<string, Func<DialogueLine, AtStatement>> statements = new Dictionary<string, Func<DialogueLine, AtStatement>>();
 
 		static AtStatement() {
-			statements["include"] = (param) => new AtInclude(param);
+			statements["@include"] = (param) => new AtInclude(param);
 		}
 
 		public static AtStatement GetStatement(string name, DialogueLine param) {
@@ -20,10 +20,32 @@ namespace Compiler.At {
 				return statements[name](param);
 			}
 
-			throw new NoSuchStatementException(name);
+			if (name[0] == '@') {
+				return new NoSuchStatement(param);
+			}
+
+			return new NoopStatement();
 		}
 
 		public abstract bool Run(DialogueFile file);
+	}
+
+	public class NoSuchStatement : AtStatement {
+		private string statement;
+
+		public NoSuchStatement(DialogueLine line) {
+			statement = line.LineType;
+		}
+
+		public override bool Run(DialogueFile file) {
+			throw new NotImplementedException(statement);
+		}
+	}
+
+	public class NoopStatement : AtStatement {
+		public override bool Run(DialogueFile file) {
+			return true;
+		}
 	}
 }
 
