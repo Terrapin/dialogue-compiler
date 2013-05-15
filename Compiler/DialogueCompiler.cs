@@ -1,15 +1,24 @@
 using System;
 using CommandLine;
+using CommandLine.Text;
 using System.IO;
 
 namespace Compiler {
 	public class DialogueCompiler {
 		public class Options {
-			[Value(1)]
+			[Value(1, Required=true)]
 			public string InputFile { get; set; }
 
-			[Option('o', "out")]
+			[Option('o', "out", HelpText="Place output into <file>. Default: Standard output")]
 			public string Output { get; set; }
+
+			public string GetUsage() {
+				HelpText t = new HelpText("SDT Dialogue Compiler");
+				t.AddPreOptionsLine("Usage: compiler <main dialogue file> [-o <output file>]");
+				t.AddDashesToOption = true;
+				t.AddOptions(this);
+				return t.ToString();
+			}
 		}
 
 		public string BasePath { get; private set; }
