@@ -6,19 +6,24 @@ namespace Compiler {
 	public class DialogueFile {
 		private TextReader file;
 		private int lineNumber;
-		private List<DialogueLine> contents;
+		private IList<DialogueLine> contents;
 
 		public IEnumerable<DialogueLine> Lines {
 			get {
-				if (contents == null) {
-					Parse();
-				}
-
+				Parse();
 				return contents;
 			}
 		}
 
 		public string FileName { get; private set; }
+
+		public static readonly DialogueFile NullFile = new DialogueFile();
+
+		private DialogueFile() {
+			lineNumber = 0;
+			contents = new List<DialogueLine>().AsReadOnly();
+			FileName = "{Null file}";
+		}
 
 		public DialogueFile(string path) {
 			lineNumber = 0;
@@ -39,10 +44,16 @@ namespace Compiler {
 		}
 
 		public void AddLines(IEnumerable<DialogueLine> lines) {
-			contents.AddRange(lines);
+			foreach (var line in lines) {
+				contents.Add(line);
+			}
 		}
 
 		public void Parse() {
+			if (contents != null) {
+				return;
+			}
+
 			contents = new List<DialogueLine>();
 
 			var line = file.ReadLine();

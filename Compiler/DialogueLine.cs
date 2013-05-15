@@ -18,6 +18,15 @@ namespace Compiler {
 
 		public LineOptions Options { get; private set; }
 
+		public DialogueLine(string type, string contents, LineOptions opts) {
+			LineType = type;
+			Content = contents;
+			QuotedContent = string.Format("\"{0}\"", contents);
+			Options = opts ?? new LineOptions();
+			LineNumber = 0;
+			File = DialogueFile.NullFile;
+		}
+
 		public DialogueLine(string line, DialogueFile file, int num) {
 			Regex re = new Regex("([^:]+):(\"([^\"]*)\")?({.*})?");
 			var match = re.Match(line);
