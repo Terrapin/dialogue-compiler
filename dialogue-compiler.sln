@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compiler", "Compiler\Compil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLine", "CommandLine\src\CommandLine\CommandLine.csproj", "{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.Net40", "JSON\Src\Newtonsoft.Json\Newtonsoft.Json.Net40.csproj", "{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{46BB731B-D39C-4ADD-AA4B-A32CA6358008}.Debug|x86.Build.0 = Debug|x86
 		{46BB731B-D39C-4ADD-AA4B-A32CA6358008}.Release|x86.ActiveCfg = Release|x86
 		{46BB731B-D39C-4ADD-AA4B-A32CA6358008}.Release|x86.Build.0 = Release|x86
+		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Debug|x86.Build.0 = Debug|Any CPU
+		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|x86.ActiveCfg = Release|Any CPU
+		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|x86.Build.0 = Release|Any CPU
 		{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}.Debug|x86.Build.0 = Debug|Any CPU
 		{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}.Release|x86.ActiveCfg = Release|Any CPU

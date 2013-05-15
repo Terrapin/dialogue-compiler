@@ -47,8 +47,21 @@
       <Project>{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}</Project>
       <Name>CommandLine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JSON\Src\Newtonsoft.Json\Newtonsoft.Json.Net40.csproj">
+      <Project>{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}</Project>
+      <Name>Newtonsoft.Json.Net40</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="At\" />
   </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>
