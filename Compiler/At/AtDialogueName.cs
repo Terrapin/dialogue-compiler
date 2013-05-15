@@ -2,17 +2,17 @@ using System;
 
 namespace Compiler.At {
 	public class AtDialogueName : AtStatement {
-		private string name;
+		private DialogueLine name;
 
 		public AtDialogueName(DialogueLine param) {
-			name = param.Content;
+			name = param;
 		}
 
 		public override bool Run(DialogueFile file) {
 			if (DialogueCompiler.Instance.DialogueName == null) {
-				DialogueCompiler.Instance.DialogueName = name;
+				DialogueCompiler.Instance.DialogueName = name.Content;
 			} else {
-				//Raise warning
+				DialogueCompiler.Instance.PrintWarning("Dialogue name is already defined. Only the first dialogue name is used", name);
 			}
 
 			return false;

@@ -15,19 +15,22 @@ namespace Compiler {
 			}
 		}
 
-		public string FileName { get; private set; }
+		public string FileName { get { return Path.GetFileNameWithoutExtension(FilePath); } }
+
+		public string FilePath { get; private set; }
+
+		public string FileNameWithExt { get { return Path.GetFileName(FilePath); } }
 
 		public static readonly DialogueFile NullFile = new DialogueFile();
 
 		private DialogueFile() {
 			lineNumber = 0;
 			contents = new List<DialogueLine>().AsReadOnly();
-			FileName = "{Null file}";
+			FilePath = "{Null file}";
 		}
 
 		public DialogueFile(string path) {
 			lineNumber = 0;
-			FileName = Path.GetFileNameWithoutExtension(path);
 
 			var f = path = Path.Combine(DialogueCompiler.Instance.BasePath, path);
 			if (!File.Exists(f)) {
@@ -40,6 +43,7 @@ namespace Compiler {
 				}
 			}
 
+			FilePath = f;
 			file = new StreamReader(f);
 		}
 

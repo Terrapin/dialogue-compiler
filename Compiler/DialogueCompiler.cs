@@ -61,6 +61,10 @@ namespace Compiler {
 				Out.WriteLine("{2}", line.File.FileName, line.LineNumber, line);
 			}
 		}
+
+		public void PrintWarning(string warning, DialogueLine source) {
+			Console.Error.WriteLine("WARNING: {0} (at location {1}:{2})", warning, source.File.FileNameWithExt, source.LineNumber);
+		}
 	}
 }
 
