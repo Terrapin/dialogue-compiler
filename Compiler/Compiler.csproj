@@ -40,6 +40,7 @@
     <Compile Include="DialogueFile.cs" />
     <Compile Include="At\AtInclude.cs" />
     <Compile Include="At\AtStatement.cs" />
+    <Compile Include="LineOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

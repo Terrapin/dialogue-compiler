@@ -1,10 +1,11 @@
 using System;
 using System.Text.RegularExpressions;
 using Compiler.At;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Compiler {
 	public class DialogueLine {
-
 		public DialogueFile File { get; private set; }
 
 		public int LineNumber { get; private set; }
@@ -15,7 +16,7 @@ namespace Compiler {
 
 		public string Content { get; private set; }
 
-		public string Options { get; private set; }
+		public LineOptions Options { get; private set; }
 
 		public DialogueLine(string line, DialogueFile file, int num) {
 			Regex re = new Regex("([^:]+):(\"([^\"]*)\")?({.*})?");
@@ -24,7 +25,9 @@ namespace Compiler {
 			LineType = match.Groups[1].Value;
 			QuotedContent = match.Groups[2].Value;
 			Content = match.Groups[3].Value;
-			Options = match.Groups[4].Value;
+			var opt = match.Groups[4].Value;
+			Options = JsonConvert.DeserializeObject<LineOptions>(opt) ?? new LineOptions();
+
 			File = file;
 			LineNumber = num;
 		}
