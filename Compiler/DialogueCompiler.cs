@@ -21,6 +21,8 @@ namespace Compiler {
 			}
 		}
 
+		public string DialogueName { get; set; }
+
 		public string BasePath { get; private set; }
 
 		public static DialogueCompiler Instance { get; private set; }
@@ -49,6 +51,12 @@ namespace Compiler {
 		}
 
 		internal void InterpretFile() {
+			MainFile.Parse();
+
+			if (DialogueName != null) {
+				Out.WriteLine(new DialogueLine("dialogue_name", DialogueName, null));
+			}
+
 			foreach (var line in MainFile.Lines) {
 				Out.WriteLine("{2}", line.File.FileName, line.LineNumber, line);
 			}

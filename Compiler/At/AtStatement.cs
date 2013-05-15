@@ -9,11 +9,10 @@ namespace Compiler.At {
 			}
 		}
 
-		private static Dictionary<string, Func<DialogueLine, AtStatement>> statements = new Dictionary<string, Func<DialogueLine, AtStatement>>();
-
-		static AtStatement() {
-			statements["@include"] = (param) => new AtInclude(param);
-		}
+		private static Dictionary<string, Func<DialogueLine, AtStatement>> statements = new Dictionary<string, Func<DialogueLine, AtStatement>> {
+			{"@include", (param) => new AtInclude(param)},
+			{"dialogue_name", (param) => new AtDialogueName(param)},
+		};
 
 		public static AtStatement GetStatement(string name, DialogueLine param) {
 			if (statements.ContainsKey(name)) {
