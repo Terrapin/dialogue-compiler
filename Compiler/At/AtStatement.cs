@@ -30,14 +30,15 @@ namespace Compiler.At {
 	}
 
 	public class NoSuchStatement : AtStatement {
-		private string statement;
+		private DialogueLine statement;
 
 		public NoSuchStatement(DialogueLine line) {
-			statement = line.LineType;
+			statement = line;
 		}
 
 		public override bool Run(DialogueFile file) {
-			throw new NotImplementedException(statement);
+			DialogueCompiler.Instance.Error(statement, "No such statement ({0})", statement.LineType);
+			return false;
 		}
 	}
 

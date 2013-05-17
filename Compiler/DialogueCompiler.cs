@@ -29,6 +29,7 @@ namespace Compiler {
 
 		private DialogueFile MainFile;
 		private TextWriter Out;
+		private bool hadError = false;
 
 		public DialogueCompiler(Options opts) {
 			if (Instance == null) {
@@ -53,6 +54,10 @@ namespace Compiler {
 		internal void InterpretFile() {
 			MainFile.Parse();
 
+			if (hadError) {
+				return;
+			}
+
 			if (DialogueName != null) {
 				Out.WriteLine(new DialogueLine("dialogue_name", DialogueName, null));
 			}
@@ -62,8 +67,15 @@ namespace Compiler {
 			}
 		}
 
-		public void PrintWarning(string warning, DialogueLine source) {
-			Console.Error.WriteLine("WARNING: {0} (at location {1}:{2})", warning, source.File.FileNameWithExt, source.LineNumber);
+		public void PrintWarning(DialogueLine source, string message, params string[] extras) {
+			message = String.Format(message, extras);
+			Console.Error.WriteLine("WARNING: {0} (at location {1}:{2})", message, source.File.FileNameWithExt, source.LineNumber);
+		}
+
+		public void Error(DialogueLine source, string message, params string[] extras) {
+			message = String.Format(message, extras);
+			Console.Error.WriteLine("ERROR: {0} (at location {1}:{2})", message, source.File.FileNameWithExt, source.LineNumber);
+			hadError = true;
 		}
 	}
 }
