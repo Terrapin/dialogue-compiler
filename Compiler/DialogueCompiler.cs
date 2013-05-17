@@ -31,7 +31,7 @@ namespace Compiler {
 
 		public static DialogueCompiler Instance { get; private set; }
 
-		private DialogueFile MainFile;
+		private IList<DialogueFile> files = new List<DialogueFile>();
 		private TextWriter Out;
 		private bool hadError = false;
 
@@ -42,7 +42,7 @@ namespace Compiler {
 
 			BasePath = Path.GetDirectoryName(Path.GetFullPath(opts.InputFile));
 
-			MainFile = DialogueFile.Open(opts.InputFile);
+			ImportFile(DialogueFile.Open(opts.InputFile));
 
 			if (opts.Output == null) {
 				Out = Console.Out;
@@ -56,23 +56,31 @@ namespace Compiler {
 		}
 
 		internal void InterpretFile() {
-			MainFile.Parse();
-
 			if (hadError) {
 				return;
 			}
 
+			EmitPreamble();
+
+			foreach (var f in files) {
+				foreach (var line in f.Lines) {
+					Out.WriteLine("{2}", line.File.FileName, line.LineNumber, line);
+				}
+			}
+		}
+
+		void EmitPreamble() {
 			if (DialogueName != null) {
 				Out.WriteLine(new DialogueLine("dialogue_name", DialogueName, null));
 			}
-
 			if (initialSettings.Count > 0) {
 				Out.WriteLine(new DialogueLine("initial_settings", initialSettings));
 			}
+		}
 
-			foreach (var line in MainFile.Lines) {
-				Out.WriteLine("{2}", line.File.FileName, line.LineNumber, line);
-			}
+		public void ImportFile(DialogueFile file) {
+			file.Parse();
+			files.Add(file);
 		}
 
 		public bool SetInitialValue(string key, object value) {
