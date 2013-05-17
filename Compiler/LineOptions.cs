@@ -85,6 +85,32 @@ namespace Compiler {
 			}
 		}
 
+		public void SetCheck(string key, object value) {
+			object o;
+			IDictionary<string, object> check;
+			if (inner.TryGetValue("check", out o) && o is IDictionary<string, object>) {
+				check = (IDictionary<string, object>)o;
+			} else {
+				check = new Dictionary<string, object>();
+				inner["check"] = check;
+			}
+
+			check[key] = value;
+		}
+
+		public void SetSet(string key, object value) {
+			object o;
+			IDictionary<string, object> set;
+			if (inner.TryGetValue("set", out o) && o is IDictionary<string, object>) {
+				set = (IDictionary<string, object>)o;
+			} else {
+				set = new Dictionary<string, object>();
+				inner["set"] = set;
+			}
+
+			set[key] = value;
+		}
+
 		[JsonIgnore]
 		public bool IsEmpty { get { return inner.Count == 0; } }
 
