@@ -42,7 +42,7 @@ namespace Compiler {
 
 			BasePath = Path.GetDirectoryName(Path.GetFullPath(opts.InputFile));
 
-			MainFile = new DialogueFile(opts.InputFile);
+			MainFile = DialogueFile.Open(opts.InputFile);
 
 			if (opts.Output == null) {
 				Out = Console.Out;

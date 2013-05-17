@@ -22,6 +22,7 @@ namespace Compiler {
 		public string FileNameWithExt { get { return Path.GetFileName(FilePath); } }
 
 		public static readonly DialogueFile NullFile = new DialogueFile();
+		private static Dictionary<string, DialogueFile> cache = new Dictionary<string, DialogueFile>();
 
 		private DialogueFile() {
 			lineNumber = 0;
@@ -29,9 +30,14 @@ namespace Compiler {
 			FilePath = "{Null file}";
 		}
 
-		public DialogueFile(string path) {
+		private DialogueFile(string path) {
 			lineNumber = 0;
 
+			FilePath = path;
+			file = new StreamReader(path);
+		}
+
+		public static DialogueFile Open(string path) {
 			var f = path = Path.Combine(DialogueCompiler.Instance.BasePath, path);
 			if (!File.Exists(f)) {
 				f = path + ".txt";
@@ -43,8 +49,11 @@ namespace Compiler {
 				}
 			}
 
-			FilePath = f;
-			file = new StreamReader(f);
+			if (!cache.ContainsKey(f)) {
+				cache[f] = new DialogueFile(f);
+			}
+			
+			return cache[f];
 		}
 
 		public void AddLines(IEnumerable<DialogueLine> lines) {

@@ -8,7 +8,7 @@ namespace Compiler.At {
 		private DialogueFile File;
 
 		public AtInclude(DialogueLine param) {
-			File = new DialogueFile(param.Content);
+			File = DialogueFile.Open(param.Content);
 		}
 
 		public override bool Run(DialogueFile file) {
