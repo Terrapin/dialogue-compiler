@@ -12,6 +12,7 @@ namespace Compiler.At {
 		private static Dictionary<string, Func<DialogueLine, AtStatement>> statements = new Dictionary<string, Func<DialogueLine, AtStatement>> {
 			{"@include", (param) => new AtInclude(param)},
 			{"dialogue_name", (param) => new AtDialogueName(param)},
+			{"initial_settings", (param) => new AtInitialSettings(param)},
 		};
 
 		public static AtStatement GetStatement(string name, DialogueLine param) {

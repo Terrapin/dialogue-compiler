@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using CommandLine;
 using CommandLine.Text;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Compiler {
 	public class DialogueCompiler {
@@ -24,6 +26,8 @@ namespace Compiler {
 		public string DialogueName { get; set; }
 
 		public string BasePath { get; private set; }
+
+		private LineOptions initialSettings = new LineOptions();
 
 		public static DialogueCompiler Instance { get; private set; }
 
@@ -62,8 +66,33 @@ namespace Compiler {
 				Out.WriteLine(new DialogueLine("dialogue_name", DialogueName, null));
 			}
 
+			if (initialSettings.Count > 0) {
+				Out.WriteLine(new DialogueLine("initial_settings", initialSettings));
+			}
+
 			foreach (var line in MainFile.Lines) {
 				Out.WriteLine("{2}", line.File.FileName, line.LineNumber, line);
+			}
+		}
+
+		public bool SetInitialValue(string key, object value) {
+			if (initialSettings.ContainsKey(key) && !initialSettings[key].Equals(value)) {
+				return true;
+			}
+
+			initialSettings[key] = value;
+			return false;
+		}
+
+		public IList<string> SetInitialSettings(IDictionary<string, object> values) {
+			return SetInitialSettingsInner(values).ToList();
+		}
+
+		private IEnumerable<string> SetInitialSettingsInner(IDictionary<string, object> values) {
+			foreach (var val in values) {
+				if (SetInitialValue(val.Key, val.Value)) {
+					yield return val.Key;
+				}
 			}
 		}
 

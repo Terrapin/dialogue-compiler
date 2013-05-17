@@ -18,6 +18,15 @@ namespace Compiler {
 
 		public LineOptions Options { get; private set; }
 
+		public DialogueLine(string type, LineOptions opts) {
+			LineType = type;
+			Content = "";
+			QuotedContent = "";
+			Options = opts ?? new LineOptions();
+			LineNumber = 0;
+			File = DialogueFile.NullFile;
+		}
+
 		public DialogueLine(string type, string contents, LineOptions opts) {
 			LineType = type;
 			Content = contents;
