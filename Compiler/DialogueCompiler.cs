@@ -32,6 +32,7 @@ namespace Compiler {
 		public static DialogueCompiler Instance { get; private set; }
 
 		private IList<DialogueFile> files = new List<DialogueFile>();
+		private HashSet<string> providedChapters = new HashSet<string>();
 		private TextWriter Out;
 		private bool hadError = false;
 
@@ -85,6 +86,14 @@ namespace Compiler {
 		public void ImportFile(DialogueFile file) {
 			file.Parse();
 			files.Add(file);
+		}
+
+		public bool HasChapter(string chapterName) {
+			return providedChapters.Contains(chapterName);
+		}
+
+		public void ProvideChapter(string chapterName) {
+			providedChapters.Add(chapterName);
 		}
 
 		public bool SetInitialValue(string key, object value) {
