@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Compiler.At;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Compiler {
 	public class LineOptions : IDictionary<string, object> {
@@ -87,28 +88,28 @@ namespace Compiler {
 
 		public void SetCheck(string key, object value) {
 			object o;
-			IDictionary<string, object> check;
-			if (inner.TryGetValue("check", out o) && o is IDictionary<string, object>) {
-				check = (IDictionary<string, object>)o;
+			IDictionary<string, JToken> check;
+			if (inner.TryGetValue("check", out o) && o is IDictionary<string, JToken>) {
+				check = (IDictionary<string, JToken>)o;
 			} else {
-				check = new Dictionary<string, object>();
+				check = new Dictionary<string, JToken>();
 				inner["check"] = check;
 			}
 
-			check[key] = value;
+			check[key] = JToken.FromObject(value);
 		}
 
 		public void SetSet(string key, object value) {
 			object o;
-			IDictionary<string, object> set;
-			if (inner.TryGetValue("set", out o) && o is IDictionary<string, object>) {
-				set = (IDictionary<string, object>)o;
+			IDictionary<string, JToken> set;
+			if (inner.TryGetValue("set", out o) && o is IDictionary<string, JToken>) {
+				set = (IDictionary<string, JToken>)o;
 			} else {
-				set = new Dictionary<string, object>();
+				set = new Dictionary<string, JToken>();
 				inner["set"] = set;
 			}
 
-			set[key] = value;
+			set[key] = JToken.FromObject(value);
 		}
 
 		[JsonIgnore]

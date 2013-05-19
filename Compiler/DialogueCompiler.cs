@@ -60,6 +60,10 @@ namespace Compiler {
 				return;
 			}
 
+			if (files[0].ChapterName != null) {
+				initialSettings["__sdtc_ch"] = files[0].ChapterName;
+			}
+
 			EmitPreamble();
 
 			foreach (var f in files) {

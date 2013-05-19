@@ -8,6 +8,8 @@ namespace Compiler {
 		private int lineNumber;
 		private IList<DialogueLine> contents;
 
+		public string ChapterName { get; set; }
+
 		public IEnumerable<DialogueLine> Lines {
 			get {
 				Parse();
@@ -82,6 +84,12 @@ namespace Compiler {
 				}
 
 				line = file.ReadLine();
+			}
+
+			if (ChapterName != null) {
+				foreach (var l in Lines) {
+					l.Options.SetCheck("__sdtc_ch", ChapterName);
+				}
 			}
 		}
 	}
