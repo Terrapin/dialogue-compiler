@@ -4,10 +4,6 @@ using Compiler;
 
 namespace Compiler.At {
 	public abstract class AtStatement {
-		public class NoSuchStatementException : Exception {
-			public NoSuchStatementException(string statement) : base(statement) {
-			}
-		}
 
 		private static Dictionary<string, Func<DialogueLine, AtStatement>> statements = new Dictionary<string, Func<DialogueLine, AtStatement>> {
 			{"@include", (param) => new AtInclude(param)},
