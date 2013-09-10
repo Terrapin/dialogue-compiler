@@ -12,7 +12,9 @@ namespace Compiler.At {
 			if (DialogueCompiler.Instance.DialogueName == null) {
 				DialogueCompiler.Instance.DialogueName = name.Content;
 			} else {
-				DialogueCompiler.Instance.PrintWarning(name, "Dialogue name is already defined. Only the first dialogue name is used");
+				if (DialogueCompiler.Instance.DialogueName != name.Content) {
+					DialogueCompiler.Instance.PrintWarning(name, "Dialogue name is already defined. Only the first dialogue name is used");
+				}
 			}
 
 			return false;
