@@ -88,7 +88,7 @@ namespace Compiler {
 
 			if (ChapterName != null) {
 				foreach (var l in Lines) {
-					l.Options.SetCheck("__sdtc_ch", ChapterName);
+					l.Options.SetCheck(DialogueCompiler.ChapterVariable, ChapterName);
 				}
 			}
 		}

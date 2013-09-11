@@ -17,6 +17,11 @@ namespace Compiler.At {
 			{"q", (name, args) => new AtQuote(name, args)},
 
 			{"switch", (name, args) => new AtSwitch(name, args)},
+
+			{"chaptervariable", (name, args) => new AtCurrentChapter(name, args)},
+			{"currentchapter", (name, args) => new AtCurrentChapter(name, args)},
+			{"chvar", (name, args) => new AtCurrentChapter(name, args)},
+			{"curch", (name, args) => new AtCurrentChapter(name, args)},
 		};
 		private static Regex commandPattern = new Regex(@"@([a-zA-Z]+)(?:;|\((?:([0-9a-zA-Z]+),?)+\))");
 

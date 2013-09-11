@@ -16,7 +16,7 @@ namespace Compiler.At {
 				return null;
 			}
 
-			line.Options.SetSet("__sdtdc_ch", target);
+			line.Options.SetSet(DialogueCompiler.ChapterVariable, target);
 			return "";
 		}
 	}

@@ -27,6 +27,7 @@ namespace Compiler {
 
 		public string BasePath { get; private set; }
 
+		private DialogueFile BaseFile;
 		private LineOptions initialSettings = new LineOptions();
 
 		public static DialogueCompiler Instance { get; private set; }
@@ -35,6 +36,7 @@ namespace Compiler {
 		private HashSet<string> providedChapters = new HashSet<string>();
 		private TextWriter Out;
 		private bool hadError = false;
+		public const string ChapterVariable = "__sdtdc_ch";
 
 		public DialogueCompiler(Options opts) {
 			if (Instance == null) {
@@ -43,7 +45,8 @@ namespace Compiler {
 
 			BasePath = Path.GetDirectoryName(Path.GetFullPath(opts.InputFile));
 
-			ImportFile(DialogueFile.Open(opts.InputFile));
+			BaseFile = DialogueFile.Open(opts.InputFile);
+			ImportFile(BaseFile);
 
 			if (opts.Output == null) {
 				Out = Console.Out;
@@ -61,8 +64,8 @@ namespace Compiler {
 				return;
 			}
 
-			if (files[0].ChapterName != null) {
-				initialSettings["__sdtc_ch"] = files[0].ChapterName;
+			if (BaseFile.ChapterName != null) {
+				initialSettings[ChapterVariable] = BaseFile.ChapterName;
 			}
 
 			EmitPreamble();

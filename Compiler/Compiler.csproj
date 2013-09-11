@@ -49,6 +49,8 @@
     <Compile Include="At\AtCommand.cs" />
     <Compile Include="At\AtNewLine.cs" />
     <Compile Include="At\AtQuote.cs" />
+    <Compile Include="At\AtSwitch.cs" />
+    <Compile Include="At\AtCurrentChapter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
