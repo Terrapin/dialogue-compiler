@@ -8,7 +8,7 @@
     <ProjectGuid>{46BB731B-D39C-4ADD-AA4B-A32CA6358008}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Compiler</RootNamespace>
-    <AssemblyName>Compiler</AssemblyName>
+    <AssemblyName>sdtdc</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +45,7 @@
     <Compile Include="At\AtDialogueName.cs" />
     <Compile Include="At\AtInitialSettings.cs" />
     <Compile Include="At\AtChapter.cs" />
+    <Compile Include="At\AtLoad.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

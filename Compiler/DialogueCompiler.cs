@@ -16,7 +16,7 @@ namespace Compiler {
 
 			public string GetUsage() {
 				HelpText t = new HelpText("SDT Dialogue Compiler");
-				t.AddPreOptionsLine("Usage: compiler <main dialogue file> [-o <output file>]");
+				t.AddPreOptionsLine("Usage: sdtdc <main dialogue file> [-o <output file>]");
 				t.AddDashesToOption = true;
 				t.AddOptions(this);
 				return t.ToString();
