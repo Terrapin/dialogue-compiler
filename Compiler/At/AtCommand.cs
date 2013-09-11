@@ -6,13 +6,16 @@ using System.Text;
 namespace Compiler.At {
 	public abstract class AtCommand {
 		private static Dictionary<string, Func<string, string[], AtCommand>> commands = new Dictionary<string, Func<string, string[], AtCommand>> {
-			{"lf", (name, args) => new AtNewLine(name, args)},
-			{"linefeed", (name, args) => new AtNewLine(name, args)},
 			{"newline", (name, args) => new AtNewLine(name, args)},
+			{"linefeed", (name, args) => new AtNewLine(name, args)},
+			{"lf", (name, args) => new AtNewLine(name, args)},
 			{"br", (name, args) => new AtNewLine(name, args)},
 			{"cr", (name, args) => new AtNewLine(name, args)},
-			{"q", (name, args) => new AtQuote(name, args)},
+			{"crlf", (name, args) => new AtNewLine(name, args)},
+			
 			{"quote", (name, args) => new AtQuote(name, args)},
+			{"q", (name, args) => new AtQuote(name, args)},
+
 			{"switch", (name, args) => new AtSwitch(name, args)},
 		};
 		private static Regex commandPattern = new Regex(@"@([a-zA-Z]+)(?:;|\((?:([0-9a-zA-Z]+),?)+\))");
