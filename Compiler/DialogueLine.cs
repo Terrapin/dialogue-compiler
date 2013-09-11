@@ -51,10 +51,18 @@ namespace Compiler {
 		}
 
 		public bool InterpretAtSigns() {
-			bool keep = true;
+			bool keep;
 
 			AtStatement stmt = AtStatement.GetStatement(LineType, this);
-			keep &= stmt.Run(File);
+			keep = stmt.Run(File);
+
+			string newLine = AtCommand.ExecuteCommands(File, this);
+			if (newLine == null) {
+				keep = false;
+			} else {
+				Content = newLine;
+				QuotedContent = '"' + newLine + '"';
+			}
 
 			return keep;
 		}
