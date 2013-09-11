@@ -13,6 +13,7 @@ namespace Compiler.At {
 			{"cr", (name, args) => new AtNewLine(name, args)},
 			{"q", (name, args) => new AtQuote(name, args)},
 			{"quote", (name, args) => new AtQuote(name, args)},
+			{"switch", (name, args) => new AtSwitch(name, args)},
 		};
 		private static Regex commandPattern = new Regex(@"@([a-zA-Z]+)(?:;|\((?:([0-9a-zA-Z]+),?)+\))");
 
